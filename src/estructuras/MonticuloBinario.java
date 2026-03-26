@@ -7,7 +7,6 @@ package estructuras;
 /**
  * Implementación de un montículo binario (min-heap) usando arreglo.
  * @param <T> Tipo de elementos (deben ser Comparables)
- * @author Equipo
  * @version 1.0
  */
 public class MonticuloBinario<T extends Comparable<T>> {
@@ -63,6 +62,30 @@ public class MonticuloBinario<T extends Comparable<T>> {
     public T verMin() {
         return estaVacio() ? null : elementos[1];
     }
+    
+    /**
+     * Obtiene el elemento en una posición específica (índice 1 = raíz).
+     */
+    public T obtener(int indice) {
+        if (indice < 1 || indice > tamanio) {
+            return null;
+        }
+        return elementos[indice];
+    }
+    
+    /**
+     * Obtiene todos los elementos como arreglo (para visualización).
+     */
+    @SuppressWarnings("unchecked")
+    public T[] getElementos() {
+        // Crear un arreglo de tipo T
+        T[] resultado = (T[]) new Comparable[tamanio + 1];
+        for (int i = 1; i <= tamanio; i++) {
+            resultado[i] = elementos[i];
+        }
+        return resultado;
+    }
+    
     
     /**
      * Flota un elemento desde una posición hacia arriba.
@@ -129,44 +152,51 @@ public class MonticuloBinario<T extends Comparable<T>> {
         return tamanio;
     }
     
-    /**
-     * Obtiene todos los elementos como arreglo (para visualización).
-     */
-    public T[] getElementos() {
-        @SuppressWarnings("unchecked")
-        T[] copia = (T[]) new Comparable[tamanio + 1];
-        for (int i = 1; i <= tamanio; i++) {
-            copia[i] = elementos[i];
-        }
-        return copia;
-    }
     
     /**
      * Representación como árbol (para visualización).
      */
     public String toTreeString() {
+        if (tamanio == 0) {
+            return "Cola vacía";
+        }
         StringBuilder sb = new StringBuilder();
         toTreeString(1, "", true, sb);
         return sb.toString();
     }
+
     
     private void toTreeString(int index, String prefijo, boolean esUltimo, StringBuilder sb) {
         if (index > tamanio) return;
-        
+
+        // Agregar el nodo actual
         sb.append(prefijo);
         sb.append(esUltimo ? "└── " : "├── ");
-        sb.append(elementos[index]).append("\n");
-        
+
+        // Obtener el elemento en la posición index
+        T elemento = elementos[index];
+        if (elemento != null) {
+            sb.append(elemento.toString());
+        } else {
+            sb.append("null");
+        }
+        sb.append("\n");
+
+        // Calcular índices de hijos
         int izquierdo = index * 2;
         int derecho = index * 2 + 1;
-        
-        if (izquierdo <= tamanio || derecho <= tamanio) {
+
+        // Determinar si hay hijos
+        boolean tieneIzquierdo = izquierdo <= tamanio;
+        boolean tieneDerecho = derecho <= tamanio;
+
+        if (tieneIzquierdo || tieneDerecho) {
             String nuevoPrefijo = prefijo + (esUltimo ? "    " : "│   ");
-            
-            if (izquierdo <= tamanio) {
-                toTreeString(izquierdo, nuevoPrefijo, derecho > tamanio, sb);
+
+            if (tieneIzquierdo) {
+                toTreeString(izquierdo, nuevoPrefijo, !tieneDerecho, sb);
             }
-            if (derecho <= tamanio) {
+            if (tieneDerecho) {
                 toTreeString(derecho, nuevoPrefijo, true, sb);
             }
         }
