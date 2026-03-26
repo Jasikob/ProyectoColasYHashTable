@@ -3,10 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package estructuras;
-
 /**
  * Representa un usuario del sistema con su tipo y prioridad.
- * @author Equipo
  * @version 1.0
  */
 public class Usuario {
@@ -81,11 +79,21 @@ public class Usuario {
     }
     
     // Getters y Setters
-    public String getNombre() { return nombre; }
-    public String getTipo() { return tipo; }
-    public int getPrioridad() { return prioridad; }
-    public Lista<Documento> getDocumentosCreados() { return documentosCreados; }
-    public Lista<Documento> getDocumentosEnCola() { return documentosEnCola; }
+    public String getNombre() { 
+        return nombre; 
+    }
+    public String getTipo() { 
+        return tipo; 
+    }
+    public int getPrioridad() { 
+        return prioridad; 
+    }
+    public Lista<Documento> getDocumentosCreados() { 
+        return documentosCreados; 
+    }
+    public Lista<Documento> getDocumentosEnCola() { 
+        return documentosEnCola; 
+    }
     
     /**
      * Marca un documento como enviado a la cola.
