@@ -2,19 +2,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package estructuras;
-
 /**
  * Registro que se almacena en la cola de impresión.
  * No contiene información del propietario.
- * @author Equipo
  * @version 1.0
  */
 public class RegistroImpresion implements Comparable<RegistroImpresion> {
     private String nombreDocumento;
     private int tamanio;
     private String tipo;
-    private double tiempoEtiqueta; // Tiempo ajustado por prioridad
+    private double tiempoEtiqueta; 
     
     /**
      * Constructor de RegistroImpresion.
