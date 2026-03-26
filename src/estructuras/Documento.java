@@ -6,7 +6,6 @@ package estructuras;
 
 /**
  * Representa un documento creado por un usuario.
- * @author Equipo
  * @version 1.0
  */
 public class Documento {
